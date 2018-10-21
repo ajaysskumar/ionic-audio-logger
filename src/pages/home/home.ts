@@ -26,33 +26,51 @@ export class HomePage {
         this.audioList = JSON.parse(localStorage.getItem("audiolist"));
         console.log(this.audioList);
       }
+
+        this.audioList.push({filename:'File 1'});
+        this.audioList.push({filename:'File 2'});
+        this.audioList.push({filename:'File 3'});
+        this.audioList.push({filename:'File 4'});
+        console.log(this.audioList);
     }
+    
 
     ionViewWillEnter() {
       this.getAudioList();
     }
 
     startRecord() {
-      if (this.platform.is('ios')) {
-        this.fileName = 'record'+new Date().getDate()+new Date().getMonth()+new Date().getFullYear()+new Date().getHours()+new Date().getMinutes()+new Date().getSeconds()+'.3gp';
-        this.filePath = this.file.documentsDirectory.replace(/file:\/\//g, '') + this.fileName;
-        this.audio = this.media.create(this.filePath);
-      } else if (this.platform.is('android')) {
-        this.fileName = 'record'+new Date().getDate()+new Date().getMonth()+new Date().getFullYear()+new Date().getHours()+new Date().getMinutes()+new Date().getSeconds()+'.3gp';
-        this.filePath = this.file.externalDataDirectory.replace(/file:\/\//g, '') + this.fileName;
-        this.audio = this.media.create(this.filePath);
-      }
-      this.audio.startRecord();
+
+      // DUMMY CODE TO REMOVE LATER
       this.recording = true;
+      return;
+
+      // ACTUAL CODE
+      // if (this.platform.is('ios')) {
+      //   this.fileName = 'record'+new Date().getDate()+new Date().getMonth()+new Date().getFullYear()+new Date().getHours()+new Date().getMinutes()+new Date().getSeconds()+'.3gp';
+      //   this.filePath = this.file.documentsDirectory.replace(/file:\/\//g, '') + this.fileName;
+      //   this.audio = this.media.create(this.filePath);
+      // } else if (this.platform.is('android')) {
+      //   this.fileName = 'record'+new Date().getDate()+new Date().getMonth()+new Date().getFullYear()+new Date().getHours()+new Date().getMinutes()+new Date().getSeconds()+'.3gp';
+      //   this.filePath = this.file.externalDataDirectory.replace(/file:\/\//g, '') + this.fileName;
+      //   this.audio = this.media.create(this.filePath);
+      // }
+      // this.audio.startRecord();
+      // this.recording = true;
     }
 
     stopRecord() {
-      this.audio.stopRecord();
-      let data = { filename: this.fileName };
-      this.audioList.push(data);
-      localStorage.setItem("audiolist", JSON.stringify(this.audioList));
+      // DUMMY CODE TO BE REMOVED LATER
       this.recording = false;
-      this.getAudioList();
+      return;
+
+      // ACTUAL CODE
+      // this.audio.stopRecord();
+      // let data = { filename: this.fileName };
+      // this.audioList.push(data);
+      // localStorage.setItem("audiolist", JSON.stringify(this.audioList));
+      // this.recording = false;
+      // this.getAudioList();
     }
 
     playAudio(file,idx) {

@@ -1,8 +1,9 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      My Life Memo 2
-    </ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -10,15 +11,74 @@
   <ion-card>
     <ion-card-content>
       <ion-card-title>
-        <button ion-button primary (click)="stopRecord()" *ngIf="recording"><ion-icon name="mic-off"></ion-icon>&nbsp;&nbsp;Stop Record</button>
-        <button ion-button primary (click)="startRecord()" *ngIf="!recording"><ion-icon name="mic"></ion-icon>&nbsp;&nbsp;Start Record</button>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-push-6>
+              <!--Basic: auto-select the icon based on the platform -->
+              <button round ion-button class="center" color="danger" (click)="stopRecord()" *ngIf="recording">
+                <ion-icon name="mic-off"></ion-icon>
+
+              </button>
+              <button round ion-button class="center" color="secondary" (click)="startRecord()" *ngIf="!recording">
+                <ion-icon name="mic"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col text-center>
+              <button class="center" round ion-button primary [disabled]="!recording">
+                <ion-icon name="bookmark"></ion-icon>
+
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+
+
       </ion-card-title>
     </ion-card-content>
   </ion-card>
-  <ion-list>
-    <ion-item *ngFor="let audio of audioList; index as i;">
-      <p>{{audio.filename}}</p>
-      <button ion-button clear item-end large (click)="playAudio(audio.filename, i)"><ion-icon name="play"></ion-icon></button>
-    </ion-item>
-  </ion-list>
+
+  <ion-scroll class="scroll-view" scrollY="true">
+    <ion-list>
+      <ion-list-header>
+        My Recordings
+      </ion-list-header>
+      <ion-item *ngFor="let audio of audioList; index as i;">
+        <ion-grid>
+          <ion-row no-padding align-items-center>
+            <ion-col col-9>
+              <label>{{audio.filename}}</label>
+            </ion-col>
+            <ion-col col-3>
+              <button ion-button clear item-end large (click)="playAudio(audio.filename, i)">
+                <ion-icon name="play"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <button disabled ion-button clear item-start small (click)="playAudio(audio.filename, i)">
+                <ion-icon name="md-cloud-upload"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col>
+              <button ion-button clear item-start small (click)="playAudio(audio.filename, i)">
+                <ion-icon name="md-create"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col>
+              <button ion-button clear item-start small (click)="playAudio(audio.filename, i)">
+                <ion-icon name="md-archive"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col>
+              <button color="danger" ion-button clear item-start small (click)="playAudio(audio.filename, i)">
+                <ion-icon name="md-trash"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+  </ion-scroll>
 </ion-content>
